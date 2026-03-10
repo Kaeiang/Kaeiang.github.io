@@ -287,17 +287,3 @@
 .scrollbar-hide::-webkit-scrollbar {
     display: none;            /* Chrome, Safari and Opera */
 }
-
-/* 文章段落 + 列表内段落 自动首行缩进2字符 */
-.post-content p,
-.post-content ul li p,
-.post-content ol li p {
-  text-indent: 2em;
-  margin: 0.6em 0; /* 可选：调整段落间距，更美观 */
-}
-
-/* 单独处理列表项，避免缩进错位 */
-.post-content ul,
-.post-content ol {
-  margin-left: 1em;
-}

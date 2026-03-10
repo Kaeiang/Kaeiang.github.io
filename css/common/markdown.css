@@ -327,3 +327,58 @@ redefine-tablet()
 .markdown-body mjx-container[display="true"]:not(.not-markdown) svg {
   display: inline-block;
 }
+/* ---------- 中文段落优化 ---------- */
+p:not(.not-markdown) {
+  text-indent: 2em;
+  text-align: justify;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+/* ---------- 标题间距优化 ---------- */
+h1:not(.not-markdown),
+h2:not(.not-markdown),
+h3:not(.not-markdown) {
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+}
+h4:not(.not-markdown),
+h5:not(.not-markdown),
+h6:not(.not-markdown) {
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+/* ---------- 列表排版 ---------- */
+ul:not(.not-markdown),
+ol:not(.not-markdown) {
+  padding-left: 1.6rem;
+}
+li:not(.not-markdown) {
+  line-height: 1.8;
+  margin-bottom: 0.4rem;
+}
+/* ---------- 引用块优化 ---------- */
+blockquote:not(.not-markdown) {
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+/* ---------- 图片排版 ---------- */
+img:not(.not-markdown) {
+  margin: 1.6rem auto;
+  display: block;
+}
+/* ---------- 表格排版 ---------- */
+table:not(.not-markdown) {
+  font-size: 0.95rem;
+}
+th {
+  font-weight: 600;
+}
+/* ---------- 分割线 ---------- */
+hr:not(.not-markdown) {
+  margin: 2.5rem 0;
+}
+/* ---------- 代码块 ---------- */
+pre code {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}

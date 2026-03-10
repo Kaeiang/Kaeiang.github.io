@@ -809,6 +809,53 @@ img[lazyload] {
 .markdown-body mjx-container[display="true"]:not(.not-markdown) svg {
   display: inline-block;
 }
+p:not(.not-markdown) {
+  text-indent: 2em;
+  text-align: justify;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+h1:not(.not-markdown),
+h2:not(.not-markdown),
+h3:not(.not-markdown) {
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+}
+h4:not(.not-markdown),
+h5:not(.not-markdown),
+h6:not(.not-markdown) {
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+ul:not(.not-markdown),
+ol:not(.not-markdown) {
+  padding-left: 1.6rem;
+}
+li:not(.not-markdown) {
+  line-height: 1.8;
+  margin-bottom: 0.4rem;
+}
+blockquote:not(.not-markdown) {
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+img:not(.not-markdown) {
+  margin: 1.6rem auto;
+  display: block;
+}
+table:not(.not-markdown) {
+  font-size: 0.95rem;
+}
+th {
+  font-weight: 600;
+}
+hr:not(.not-markdown) {
+  margin: 2.5rem 0;
+}
+pre code {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
 :root {
   --inline-code-foreground: #24292e;
   --inline-code-background: #f1f1f1;
