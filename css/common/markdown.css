@@ -328,11 +328,14 @@ redefine-tablet()
   display: inline-block;
 }
 /* ---------- 中文段落优化 ---------- */
-p:not(.not-markdown) {
+.article-content p:not(.not-markdown) {
   text-indent: 2em;
   text-align: justify;
   line-height: 1.9;
   letter-spacing: 0.02em;
+}
+.article-content li p {
+  text-indent: 0;
 }
 /* ---------- 标题间距优化 ---------- */
 h1:not(.not-markdown),
@@ -361,8 +364,7 @@ blockquote:not(.not-markdown) {
   font-size: 0.95rem;
   line-height: 1.8;
 }
-/* ---------- 图片排版 ---------- */
-img:not(.not-markdown) {
+.post-content img {
   margin: 1.6rem auto;
   display: block;
 }
@@ -381,4 +383,12 @@ hr:not(.not-markdown) {
 pre code {
   font-size: 0.9rem;
   line-height: 1.6;
+}
+/* 修复图标对齐 */
+.post-meta {
+  text-indent: 0;
+}
+.post-meta i,
+.post-meta svg {
+  margin-right: 4px;
 }

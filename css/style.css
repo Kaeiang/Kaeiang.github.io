@@ -809,11 +809,14 @@ img[lazyload] {
 .markdown-body mjx-container[display="true"]:not(.not-markdown) svg {
   display: inline-block;
 }
-p:not(.not-markdown) {
+.article-content p:not(.not-markdown) {
   text-indent: 2em;
   text-align: justify;
   line-height: 1.9;
   letter-spacing: 0.02em;
+}
+.article-content li p {
+  text-indent: 0;
 }
 h1:not(.not-markdown),
 h2:not(.not-markdown),
@@ -839,7 +842,7 @@ blockquote:not(.not-markdown) {
   font-size: 0.95rem;
   line-height: 1.8;
 }
-img:not(.not-markdown) {
+.post-content img {
   margin: 1.6rem auto;
   display: block;
 }
@@ -855,6 +858,13 @@ hr:not(.not-markdown) {
 pre code {
   font-size: 0.9rem;
   line-height: 1.6;
+}
+.post-meta {
+  text-indent: 0;
+}
+.post-meta i,
+.post-meta svg {
+  margin-right: 4px;
 }
 :root {
   --inline-code-foreground: #24292e;
