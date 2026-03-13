@@ -670,7 +670,7 @@ img[lazyload] {
 }
 .markdown-body img:not(.not-markdown) {
   box-sizing: border-box;
-  border-radius: 14px;
+  border-radius: 0px;
   max-width: 100%;
   cursor: zoom-in;
   display: block;
