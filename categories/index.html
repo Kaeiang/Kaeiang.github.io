@@ -1,647 +1,651 @@
 <!DOCTYPE html>
-<html lang="zh">
+
+<html class="article-header-style-default">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Hexo Theme Redefine">
-    
-    
-    <meta name="author" content="開陽">
-    
-    <!-- Completely eliminate flash of wrong theme -->
-    <script>
-        (function() {
-            const THEME_KEY = "REDEFINE-THEME-STATUS";
-            const DARK = "dark", LIGHT = "light";
-            
-            // Get preferred theme
-            function getTheme() {
-                try {
-                    const saved = localStorage.getItem(THEME_KEY);
-                    if (saved) {
-                        const { isDark } = JSON.parse(saved);
-                        return isDark ? DARK : LIGHT;
-                    }
-                } catch (e) {}
-                
-                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
-            }
-            
-            // Apply theme to document
-            function applyTheme(theme) {
-                const isDark = theme === DARK;
-                const root = document.documentElement;
-                
-                // Set classes for compatibility
-                root.classList.add(theme);
-                root.classList.remove(isDark ? LIGHT : DARK);
-                root.style.colorScheme = theme;
-            }
-            
-            // Initial application
-            const theme = getTheme();
-            applyTheme(theme);
-            
-            // Listen for system preference changes
-            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
-                // Only update if using system preference (no localStorage entry)
-                if (!localStorage.getItem(THEME_KEY)) {
-                    applyTheme(matches ? DARK : LIGHT);
-                }
-            });
-            
-            // Set body classes ASAP (before DOMContentLoaded)
-            (function() {
-                const addBodyClass = () => {
-                    const b = document.body;
-                    if (!b) return false;
-                    b.classList.add(theme + "-mode");
-                    return true;
-                };
-
-                // Try immediately
-                if (addBodyClass()) return;
-
-                // Observe until body exists
-                const mo = new MutationObserver(() => {
-                    if (addBodyClass()) mo.disconnect();
-                });
-                mo.observe(document.documentElement, { childList: true, subtree: true });
-            })();
-        })();
-    </script>
-    
-    <!-- preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    
-    <!--- Seo Part-->
-    
-    <link rel="canonical" href="https://kaeiang.github.io/categories/"/>
-    <meta name="robots" content="index,follow">
-    <meta name="googlebot" content="index,follow">
-    <meta name="revisit-after" content="1 days">
-    
-    
-        
-        <meta name="description" content="时光走过，留下声音，留下美。">
+	
+	<title>分类 - 開陽의 Blog</title>
+	<meta charset="utf-8">
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+	<meta name="description" content="分类 广播 6">
 <meta property="og:type" content="website">
 <meta property="og:title" content="分类">
-<meta property="og:url" content="https://kaeiang.github.io/categories/index.html">
+<meta property="og:url" content="https://kaiyangs.top/categories/index.html">
 <meta property="og:site_name" content="開陽의 Blog">
-<meta property="og:description" content="时光走过，留下声音，留下美。">
-<meta property="og:locale">
-<meta property="og:image" content="https://kaeiang.github.io/img/bgi.jpg">
+<meta property="og:description" content="分类 广播 6">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-30T16:00:00.000Z">
 <meta property="article:modified_time" content="2026-03-09T13:56:03.173Z">
 <meta property="article:author" content="Kaiyang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kaeiang.github.io/img/bgi.jpg">
-    
-    
-    <!--- Icon Part-->
-    <link rel="icon" type="image/png" href="/img/logo.ico" sizes="192x192">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/logo.ico">
-    <meta name="theme-color" content="#0078D6">
-    <link rel="shortcut icon" href="/img/logo.ico">
-    <!--- Page Info-->
-    
-    <title>
-        
-            分类 | 開陽의 Blog
-        
-    </title>
 
-    
-<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+	<meta name="theme-color" content="#5e72e4">
+	<meta name="theme-color-rgb" content="94,114,228">
+	<meta name="theme-color-origin" content="#5e72e4">
+	<meta name="argon-enable-custom-theme-color" content="true">
+	<meta name="theme-card-radius" content="4">
+	<meta name="theme-version" content="1.0.2">
+	<link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+	
+<link rel="stylesheet" href="/assets/argon_css_merged.css">
+
+	
+<link rel="stylesheet" href="/style.css">
+
+	
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Open+Sans:300,400,600,700|Noto+Serif+SC:300,600&display=swap.css">
+
+	
+<script src="/assets/argon_js_merged.js"></script>
+
+	
+<script src="/assets/js/argon.min.js"></script>
+
+	
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-    <!--- Inject Part-->
-    
+	
 
-    
-<link rel="stylesheet" href="/css/style.css">
+	<script>
+		var argonConfig = {
+			language: "zh_CN",
+			
+				zoomify: {
+					duration: 200,
+					easing: "cubic-bezier(0.4,0,0,1)",
+					scale: 0.9
+				},
+			
+			pangu: "false",
+			
+				lazyload: {
+					threshold: 800,
+					effect: "fadeIn"
+				},
+			
+			disable_pjax: false,
+			headroom: false
+		}
+	</script>
+	<script>
+		var darkmodeAutoSwitch = "false";
+		function setDarkmode(enable){
+			if (enable == true){
+				$("html").addClass("darkmode");
+			}else{
+				$("html").removeClass("darkmode");
+			}
+			$(window).trigger("scroll");
+		}
+		function toggleDarkmode(){
+			if ($("html").hasClass("darkmode")){
+				setDarkmode(false);
+				sessionStorage.setItem("Argon_Enable_Dark_Mode", "false");
+			}else{
+				setDarkmode(true);
+				sessionStorage.setItem("Argon_Enable_Dark_Mode", "true");
+			}
+		}
+		if (sessionStorage.getItem("Argon_Enable_Dark_Mode") == "true"){
+			setDarkmode(true);
+		}
+		function toggleDarkmodeByPrefersColorScheme(media){
+			if (sessionStorage.getItem('Argon_Enable_Dark_Mode') == "false" || sessionStorage.getItem('Argon_Enable_Dark_Mode') == "true"){
+				return;
+			}
+			if (media.matches){
+				setDarkmode(true);
+			}else{
+				setDarkmode(false);
+			}
+		}
+		function toggleDarkmodeByTime(){
+			if (sessionStorage.getItem('Argon_Enable_Dark_Mode') == "false" || sessionStorage.getItem('Argon_Enable_Dark_Mode') == "true"){
+				return;
+			}
+			let hour = new Date().getHours();
+			if (hour < 7 || hour >= 22){
+				setDarkmode(true);
+			}else{
+				setDarkmode(false);
+			}
+		}
+		if (darkmodeAutoSwitch == 'system'){
+			var darkmodeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+			darkmodeMediaQuery.addListener(toggleDarkmodeByPrefersColorScheme);
+			toggleDarkmodeByPrefersColorScheme(darkmodeMediaQuery);
+		}
+		if (darkmodeAutoSwitch == 'time'){
+			toggleDarkmodeByTime();
+		}
+		if (darkmodeAutoSwitch == 'alwayson'){
+			setDarkmode(true);
+		}
 
+		function toggleAmoledDarkMode(){
+			$("html").toggleClass("amoled-dark");
+			if ($("html").hasClass("amoled-dark")){
+				localStorage.setItem("Argon_Enable_Amoled_Dark_Mode", "true");
+			}else{
+				localStorage.setItem("Argon_Enable_Amoled_Dark_Mode", "false");
+			}
+		}
+		if (localStorage.getItem("Argon_Enable_Amoled_Dark_Mode") == "true"){
+			$("html").addClass("amoled-dark");
+		}else if (localStorage.getItem("Argon_Enable_Amoled_Dark_Mode") == "false"){
+			$("html").removeClass("amoled-dark");
+		}
+	</script>
+	<script>
+		if (navigator.userAgent.indexOf("Safari") !== -1 && navigator.userAgent.indexOf("Chrome") === -1){
+			$("html").addClass("using-safari");
+		}
+	</script>
 
-    
-        
-<link rel="stylesheet" href="/css/build/tailwind.css">
+	
+		
+<script src="/assets/vendor/smoothscroll/smoothscroll1.js"></script>
 
-    
-
-    
-<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
-
-    
-<link rel="stylesheet" href="/fonts/Geist/geist.css">
-
-    <!--- Font Part-->
-    
-    
-    
-    
-    
-    
-
-    <script id="hexo-configurations">
-    window.config = {"hostname":"kaeiang.github.io","root":"/","language":"zh"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"0px","image_alignment":"center","image_caption":true,"link_icon":true,"delete_mask":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/img/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#0078D6","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":false,"site_pv":false,"site_uv":false,"post_pv":false},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/img/bgi.jpg","description":"时光走过，留下声音，留下美。"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/img/bgi.jpg","dark":"/img/bgi.jpg"},"title":"開陽의 Blog","subtitle":{"text":["二〇二六，在kaiyangs.top重新出发！"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"center","links":[{"icon":"fa-brands fa-github","url":null},{"icon":"fa-brands fa-twitter","url":null},{"icon":"fa-solid fa-at","url":"kaiyang@outlook.sg"},{"icon":"fa-brands fa-telegram","url":null},{"icon":"/images/custom-icon.svg","url":null}],"qrs":[{"icon":"fa-brands fa-weixin","qr":null},{"icon":"/images/custom-icon.svg","qr":null}]}},"plugins":{"feed":{"enable":true},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1","theme":{"light":"default","dark":"dark"}}},"version":"2.9.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"},"友情链接":{"path":"/links","icon":"fa-regular fa-link"},"关于":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur","masonry":{"batch_size":12,"initial_batch_size":24}},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"},"友情链接":{"path":"/links","icon":"fa-regular fa-link"},"关于":{"path":"/about","icon":"fa-regular fa-user"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footer":{"runtime":false,"icon":"<i class=\"fa-solid fa-heart fa-beat\" style=\"--fa-animation-duration: 0.5s; color: #f54545\"></i>","start":"2023/07/22 00:00:00","statistics":true,"customize":null,"icp":{"enable":false,"number":null,"url":null}},"footerStart":"2023/07/22 00:00:00","mermaid":{"style":{"light":"default","dark":"dark"}}};
-    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-    window.i18n = {"search":"Search...","toc":"On this page","prev":"Prev","next":"Next","prev_posts":"Prev posts","next_posts":"Next posts","page":"Page %d","recent_posts":"Recent Posts","share":"Share","powered_by":"POWERED BY %s","theme":"THEME","rss_feed":"RSS Feed","category":"Category","categories":"Categories","tag":"Tag","tags":"Tags","post":"Post","posts":"Posts","tagcloud":"Tag Cloud","comment":"Comment","comments":"Comments","home":"Home","archive":"Archive","archives":"Archives","top":"TOP","sticky":"Sticky","go-back-home":"Go Back Home","masonry_loading":"Loading photos...","image_viewer":"Image viewer","close":"Close","exif":{"title":"EXIF","cards":{"camera":"Camera","lens":"Lens","exposure":"Exposure","other":"Other"},"fields":{"make":"Brand","model":"Model","date_taken":"Date taken","lens_model":"Lens","focal_length":"Focal length","focus_mode":"Focus mode","shutter":"Shutter","aperture":"Aperture","iso":"ISO","exposure_program":"Exposure program","exposure_compensation":"Exposure compensation","metering_mode":"Metering mode","flash":"Flash","white_balance":"White balance","latitude":"Latitude","longitude":"Longitude","altitude":"Altitude"},"status":{"loading":"Loading...","no_exif":"No EXIF available","library_missing":"EXIF library not loaded","image_source_missing":"Image source unavailable","unavailable":"EXIF unavailable (blocked by CORS or missing metadata)","flag_unavailable":"EXIF unavailable"}},"about":"About","changelog":"Changelog","links":"Links","link":"Link","friends":"Friends","friend":"Friend","timeline":"Timeline","shuoshuo":"Shuoshuo","bookmarks":"Bookmarks","site_uv":"VISITOR COUNT","site_pv":"TOTAL PAGE VIEWS","read_more":"Read more","wordcount":"Words","min2read":"Mins","status":"Status","runtime":"Blog up for","days":"days","hours":"hrs","minutes":"Min","seconds":"Sec","optimized_by":"and Optimized by Evan","rights":"All Rights Reserved","site_posts":"%s posts in total","site_wordcount":"%s words in total","copyright":{"author":"Author","title":"Title","link":"Link","create_time":"Created at","update_time":"Updated at","license_title":"License","license_content":"This work is licensed under %s.","all_rights_reserved":"All Rights Reserved &#169; %s","public_domain":"This work is in the public domain."},"ago":{"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"},"create_time":"Created","update_time":"Updated","expired":"This post is written %s days ago, and the content may not be up to date."};
-    window.data = {"masonry":false};
-  </script>
-    
-    <!--- Fontawesome Part-->
-    
-<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/brands.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/solid.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/regular.min.css">
-
-    
-    
-    
-    
+	
 <meta name="generator" content="Hexo 8.1.1"></head>
 
+ <style> .post-content p { text-indent: 2em; } </style> 
+
+<style id="themecolor_css">
+	
+	:root{
+		--themecolor: #5e72e4;
+		--themecolor-dark0: #5368E2;
+		--themecolor-dark: #485FE0;
+		--themecolor-dark2: #324CDD;
+		--themecolor-dark3: #233DD2;
+		--themecolor-light: #8A98EB;
+		--themecolor-rgbstr: 94,114,228;
+		--themecolor-gradient: linear-gradient(150deg,var(--themecolor-light) 15%, var(--themecolor) 70%, var(--themecolor-dark0) 94%);
+
+	}
+</style>
+<style id="theme_cardradius_css">
+	:root{
+		--card-radius: 4px;
+	}
+</style>
 
 <body>
-	<div class="progress-bar-container">
-	
-
-	
-	<span class="pjax-progress-bar"></span>
-	<!--        <span class="swup-progress-icon">-->
-	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
-	<!--        </span>-->
-	
+<div id="toolbar">
+	<header class="header-global">
+		<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light bg-primary headroom--not-bottom headroom--not-top headroom--pinned">
+			<div class="container">
+				
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<a class="navbar-brand" href="/">開陽의 Blog</a>
+				<div class="navbar-collapse collapse" id="navbar_global">
+					<div class="navbar-collapse-header">
+						<div class="row">
+							<div class="col-6 collapse-brand"></div>
+							<div class="col-6 collapse-close">
+								<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+									<span></span>
+									<span></span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<ul id="navbar_search_btn_mobile" class="navbar-nav align-items-lg-center ml-lg-auto">
+						<li class="nav-item" data-toggle="modal" data-target="#argon_search_modal" style="padding-left: 5px;">
+							<a class="nav-link nav-link-icon">
+								<i class="fa fa-search"></i>
+								<span class="nav-link-inner--text d-lg-none">搜索</span>
+							</a>
+						</li>
+					</ul>
+					
+							<ul class='navbar-nav navbar-nav-hover align-items-lg-center'>
+								
+										<li class='nav-item'>
+											<a href='/' class='nav-link' >
+												<i class='ni ni-book-bookmark d-lg-none'></i>
+												<span class='nav-link-inner--text'>首页</span>
+											</a>
+											
+										</li>
+									
+										<li class='nav-item dropdown'>
+											<a href='' class='nav-link' onclick='return false;' data-toggle='dropdown' no-pjax>
+												<i class='ni ni-book-bookmark d-lg-none'></i>
+												<span class='nav-link-inner--text'>标签</span>
+											</a>
+											
+													<div class="dropdown-menu">
+														
+															<a href='/' class='dropdown-item'>铁路</a>
+														
+															<a href='/' class='dropdown-item'>无线电广播</a>
+														
+													</div>
+												
+										</li>
+									
+										<li class='nav-item'>
+											<a href='/links' class='nav-link' >
+												<i class='ni ni-book-bookmark d-lg-none'></i>
+												<span class='nav-link-inner--text'>友情链接</span>
+											</a>
+											
+										</li>
+									
+										<li class='nav-item'>
+											<a href='/about' class='nav-link' >
+												<i class='ni ni-book-bookmark d-lg-none'></i>
+												<span class='nav-link-inner--text'>关于</span>
+											</a>
+											
+										</li>
+									
+							</ul>
+						
+					<ul class="navbar-nav align-items-lg-center ml-lg-auto">
+						<li class="nav-item" data-toggle="modal" data-target="#argon_search_modal" id="navbar_search_btn_pc">
+							<a class="nav-link nav-link-icon">
+								<i class="fa fa-search"></i>
+								<span class="nav-link-inner--text d-lg-none">搜索</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div id="navbar_menu_mask" data-toggle="collapse" data-target="#navbar_global"></div>
+			</div>
+		</nav>
+	</header>
 </div>
-
-<main class="page-container" id="swup">
-
-	
-
-	<div class="main-content-container flex flex-col justify-between min-h-dvh">
-		<div class="main-content-header">
-			<header class="navbar-container px-6 md:px-12">
-    <div class="navbar-content transition-navbar ">
-        <div class="left">
-            
-                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
-                    <img src="/img/logo.ico" class="w-full h-full rounded-xs">
-                </a>
-            
-            <a class="logo-title" href="/">
-                
-                開陽의 Blog
-                
-            </a>
-        </div>
-
-        <div class="right">
-            <!-- PC -->
-            <div class="desktop">
-                <ul class="navbar-list">
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class=""
-                                   href="/"
-                                        >
-                                    <i class="fa-regular fa-house fa-fw"></i>
-                                    ACCUEIL
-                                    
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="active"
-                                   href="/categories"
-                                        >
-                                    <i class="fa-regular fa-folder fa-fw"></i>
-                                    分类
-                                    
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class=""
-                                   href="/links"
-                                        >
-                                    <i class="fa-regular fa-link fa-fw"></i>
-                                    友情链接
-                                    
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class=""
-                                   href="/about"
-                                        >
-                                    <i class="fa-regular fa-user fa-fw"></i>
-                                    关于
-                                    
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                    
-                </ul>
-            </div>
-            <!-- Mobile -->
-            <div class="mobile">
-                
-                <div class="icon-item navbar-bar">
-                    <div class="navbar-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile sheet -->
-    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
-        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                           href="/"
-                        >
-                            <span>
-                                ACCUEIL
-                            </span>
-                            
-                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
-                           href="/categories"
-                        >
-                            <span>
-                                分类
-                            </span>
-                            
-                                <i class="fa-regular fa-folder fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                           href="/links"
-                        >
-                            <span>
-                                友情链接
-                            </span>
-                            
-                                <i class="fa-regular fa-link fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                           href="/about"
-                        >
-                            <span>
-                                关于
-                            </span>
-                            
-                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-
-            
-            
-                
-                    
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
-                           href="/archives"
-                        >
-                            <span>归档</span>
-                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
-                        </a>
-                    </li>
-                
-                    
-                    
-                    
-            
-        </ul>
-
-        <div class="statistics flex justify-around my-2.5">
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">23</div>
-        <div class="label text-third-text-color text-sm">Tags</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
-        <div class="label text-third-text-color text-sm">Catégories</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
-        <div class="label text-third-text-color text-sm">Posts</div>
-    </a>
-</div>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
+<div class="modal fade" id="argon_search_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">搜索</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- TODO -->
+<div class="form-group mb-3">
+	<div class="input-group input-group-alternative">
+		<div class="input-group-prepend">
+			<span class="input-group-text"><i class="fa fa-search"></i></span>
 		</div>
+		<input id="local-search-input" class="form-control" placeholder="搜索什么..." type="text"  autocomplete="off" data-search.path="search.xml" data-config.root="/">
+	</div>
+	<div id="local-search-result"></div>
+</div>
 
-		<div class="main-content-body transition-fade-up">
+			</div>
+		</div>
+	</div>
+</div>
+<!--Banner-->
+<section id="banner" class="banner section section-lg section-shaped">
+	<div class="shape shape-style-1 shape-primary">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	
+	<div id="banner_container" class="banner-container container text-center">
+		
+			<div class="banner-title text-white" data-text="二〇二六，在kaiyangs.top重新出发！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
+		
+		<span class="banner-subtitle d-block">时光走过，留下声音，留下美！</span></div>
+	</div>
+	
+		<style>
+			section.banner{
+				background-image: url(/assets/img/banner.jpg) !important;
+			}
+		</style>
+	
+</section>
+
+
+	<style>
+		#content:before {
+			content: '';
+			display: block;
+			position: fixed;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			z-index: -2;
+			background: url(/img/bgi.png);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			opacity: 1;
+			transition: opacity .5s ease;
+		}
+		html.darkmode #content:before{
+			filter: brightness(0.65);
+		}
+		
+		
+			#banner, #banner .shape {
+				background: transparent !important;
+			}
+		
+	</style>
+
+
+
+
+<div id="float_action_buttons" class="float-action-buttons fabtns-unloaded">
+	<button id="fabtn_toggle_sides" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" aria-hidden="true" tooltip-move-to-left="移至左侧" tooltip-move-to-right="移至右侧">
+		<span class="btn-inner--icon fabtn-show-on-right"><i class="fa fa-caret-left"></i></span>
+		<span class="btn-inner--icon fabtn-show-on-left"><i class="fa fa-caret-right"></i></span>
+	</button>
+	<button id="fabtn_back_to_top" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" aria-label="Back To Top" tooltip="回到顶部">
+		<span class="btn-inner--icon"><i class="fa fa-angle-up"></i></span>
+	</button>
+	<button id="fabtn_go_to_comment" class="btn btn-icon btn-neutral fabtn shadow-sm d-none" type="button" style='display: none;'  aria-label="Comment" tooltip="评论">
+		<span class="btn-inner--icon"><i class="fa fa-comment-o"></i></span>
+	</button>
+	<button id="fabtn_toggle_darkmode" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" style='display: none;'  aria-label="Toggle Darkmode" tooltip-darkmode="夜间模式" tooltip-blackmode="暗黑模式" tooltip-lightmode="日间模式">
+		<span class="btn-inner--icon"><i class="fa fa-moon-o"></i><i class='fa fa-lightbulb-o'></i></span>
+	</button>
+	<button id="fabtn_toggle_blog_settings_popup" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button"  aria-label="Open Blog Settings Menu" tooltip="设置">
+		<span class="btn-inner--icon"><i class="fa fa-cog"></i></span>
+	</button>
+	<div id="fabtn_blog_settings_popup" class="card shadow-sm" style="opacity: 0;" aria-hidden="true">
+		<div id="close_blog_settings"><i class="fa fa-close"></i></div>
+		<div class="blog-setting-item mt-3">
+			<div style="transform: translateY(-4px);"><div id="blog_setting_toggle_darkmode_and_amoledarkmode" tooltip-switch-to-darkmode="切换到夜间模式" tooltip-switch-to-blackmode="切换到暗黑模式"><span>夜间模式</span><span>暗黑模式</span></div></div>
+			<div style="flex: 1;"></div>
+			<label id="blog_setting_darkmode_switch" class="custom-toggle">
+				<span class="custom-toggle-slider rounded-circle"></span>
+			</label>
+		</div>
+		<div class="blog-setting-item mt-3">
+			<div style="flex: 1;">字体</div>
+			<div>
+				<button id="blog_setting_font_sans_serif" type="button" class="blog-setting-font btn btn-outline-primary blog-setting-selector-left">Sans Serif</button><button id="blog_setting_font_serif" type="button" class="blog-setting-font btn btn-outline-primary blog-setting-selector-right">Serif</button>
+			</div>
+		</div>
+		<div class="blog-setting-item mt-3">
+			<div style="flex: 1;">阴影</div>
+			<div>
+				<button id="blog_setting_shadow_small" type="button" class="blog-setting-shadow btn btn-outline-primary blog-setting-selector-left">浅阴影</button><button id="blog_setting_shadow_big" type="button" class="blog-setting-shadow btn btn-outline-primary blog-setting-selector-right">深阴影</button>
+			</div>
+		</div>
+		<div class="blog-setting-item mt-3 mb-3">
+			<div style="flex: 1;">滤镜</div>
+			<div id="blog_setting_filters" class="ml-3">
+				<button id="blog_setting_filter_off" type="button" class="blog-setting-filter-btn ml-0" filter-name="off">关闭</button>
+				<button id="blog_setting_filter_sunset" type="button" class="blog-setting-filter-btn" filter-name="sunset">日落</button>
+				<button id="blog_setting_filter_darkness" type="button" class="blog-setting-filter-btn" filter-name="darkness">暗化</button>
+				<button id="blog_setting_filter_grayscale" type="button" class="blog-setting-filter-btn" filter-name="grayscale">灰度</button>
+			</div>
+		</div>
+		<div class="blog-setting-item mb-3">
+			<div id="blog_setting_card_radius_to_default" style="cursor: pointer;" tooltip="恢复默认">圆角</div>
+			<div style="flex: 1;margin-left: 20px;margin-right: 8px;transform: translateY(2px);">
+				<div id="blog_setting_card_radius"></div>
+			</div>
+		</div>
+		
+			<div class="blog-setting-item mt-1 mb-3">
+				<div style="flex: 1;">主题色</div>
+				<div id="theme-color-picker" class="ml-3"></div>
+			</div>
+		
+	</div>
+	<button id="fabtn_open_sidebar" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" aria-label="Open Sidebar Menu" tooltip="菜单">
+		<span class="btn-inner--icon"><i class="fa fa-bars"></i></span>
+	</button>
+	<button id="fabtn_reading_progress" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" aria-hidden="true" tooltip="阅读进度">
+		<div id="fabtn_reading_progress_bar" style="width: 0%;"></div>
+		<span id="fabtn_reading_progress_details">0%</span>
+	</button>
+</div>
+
+<div id="content" class="site-content">
+
+
+
+
+
+
+
+
+
+<div class="page-information-card-container">
+	
+</div>
+
+<div id="sidebar_mask"></div>
+<aside id="leftbar" class="leftbar widget-area" role="complementary">
+		
+			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
+				<div class="leftbar-announcement-body">
+					<div class="leftbar-announcement-title text-white">公告</div>
+					<div class="leftbar-announcement-content text-white">受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
+				</div>
+			</div>
+		
+		<div id="leftbar_part1" class="widget widget_search card bg-white shadow-sm border-0">
+			<div class="leftbar-banner card-body">
+				<span class="leftbar-banner-title text-white">開陽의 Blog</span>
+				
+				
+			</div>
+			
+			
+				<ul id='leftbar_part1_menu' class='leftbar-menu'>
+					<li class='leftbar-menu-item'><a href='/'>首页</a></li><li class='leftbar-menu-item leftbar-menu-item-haschildren'><a no-pjax onclick='return false;'>分类</a><ul class='leftbar-menu-item leftbar-menu-subitem shadow-sm'><li class='leftbar-menu-item'><a href='/tags/%E9%93%81%E8%B7%AF'>铁路</a></li><li class='leftbar-menu-item'><a href='/tags/%E6%97%A0%E7%BA%BF%E7%94%B5%E5%B9%BF%E6%92%AD'>无线电广播</a></li></ul></li><li class='leftbar-menu-item'><a href='/links'>友情链接</a></li><li class='leftbar-menu-item'><a href='/about'>关于</a></li>
+				</ul>
+			
+			<div class="card-body text-center leftbar-search-button">
+				<button id="leftbar_search" class="btn btn-secondary btn-lg active btn-sm btn-block border-0" role="button" data-toggle="modal" data-target="#argon_search_modal" >
+					<i class="menu-item-icon fa fa-search mr-0"></i> 搜索
+				</button>
+			</div>
+		</div>
+		<div id="leftbar_part2" class="widget widget_search card bg-white shadow-sm border-0">
+			<div id="leftbar_part2_inner" class="card-body">
+				
+				<div class="nav-wrapper" style="padding-top: 5px; display:none; ">
+	                <ul class="nav nav-pills nav-fill" role="tablist">
+						
+						<li class="nav-item sidebar-tab-switcher">
+							<a class="active show" id="leftbar_tab_overview_btn" data-toggle="tab" href="#leftbar_tab_overview" role="tab" aria-controls="leftbar_tab_overview" no-pjax>站点概览</a>
+						</li>
+	                </ul>
+				</div>
+				<div>
+					<div class="tab-content" style="padding: 10px 10px 0 10px;">
+						
+						<div class="tab-pane fade text-center active show" id="leftbar_tab_overview" role="tabpanel" aria-labelledby="leftbar_tab_overview_btn">
+							<img id="leftbar_overview_author_image" src="/img/avatar.jpg" class="img-fluid rounded-circle shadow-sm" style="width: 100px;" alt="avatar">
+							<h6 id="leftbar_overview_author_name">開陽</h6>
+							<nav class="site-state">
+								<div class="site-state-item site-state-posts">
+									<a href="/archives">
+										<span class="site-state-item-count">9</span>
+										<span class="site-state-item-name">文章</span>
+									</a>
+								</div>
+								<div class="site-state-item site-state-categories">
+									<a data-toggle="modal" data-target="#blog_categories">
+										<span class="site-state-item-count">2</span>
+										<span class="site-state-item-name">分类</span>
+									</a>
+								</div>      
+								<div class="site-state-item site-state-tags">
+									<a data-toggle="modal" data-target="#blog_tags">
+										<span class="site-state-item-count">2</span>
+										<span class="site-state-item-name">标签</span>
+									</a>
+								</div>
+							</nav>
+							
+									<div class="site-author-links">
+										
+											<div class='site-author-links-item'>
+												<a href="mailto:kaiyang@outlook.sg" rel='noopener' target='_blank'>E-Mail</a>
+											</div>
+										
+									</div>
+								
+							
+									<div class='site-friend-links'>
+										<div class='site-friend-links-title'><i class='fa fa-fw fa-link'></i> Links</div>
+										<ul class='site-friend-links-ul'>
+											
+												<li class='site-friend-links-item'>
+													<a href='https://kaeiang.github.io/' rel='noopener' target='_blank'>原Github域名</a>
+												</li>
+											
+										</ul>
+									</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</aside>
+<div class="modal fade" id="blog_categories" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">分类</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<a class="badge badge-secondary tag" href="/categories/%E5%B9%BF%E6%92%AD/" rel="tag">广播 <span class="tag-num">6</span></a><a class="badge badge-secondary tag" href="/categories/%E9%93%81%E8%B7%AF/" rel="tag">铁路 <span class="tag-num">1</span></a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="blog_tags" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">标签</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<a class="badge badge-secondary tag" href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5%E5%B9%BF%E6%92%AD/" rel="tag">无线电广播 <span class="tag-num">7</span></a><a class="badge badge-secondary tag" href="/tags/%E9%93%81%E8%B7%AF/" rel="tag">铁路 <span class="tag-num">2</span></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+		
 			
 
-			<div class="main-content">
-				<div class="page-template-container">
-	
-
-	
-
-	<div class="page-template-content markdown-body">
+	<article class="post post-full card bg-white shadow-sm border-0 ">
+	<header class="post-header text-center">
 		
-		<h1>分类</h1>
+		<a class="post-title" href="/categories/index.html">分类</a>
+		<div class="post-meta">
+			
+						
+						<div class="post-meta-detail post-meta-detail-time">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<time title="发布于 2023-7-1 0:00:00 | 编辑于 2026-3-9 21:56:03">2023-7-1 0:00
+							</time>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-file-word-o" aria-hidden="true"></i>
+							5 字
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-readingtime">
+							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
+							1 分钟
+						</div>
+					
+		</div>
 		
+	</header>
 
+	<div class="post-content" id="post_content">
 		<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><ul>
 <li><a href="/categories/%E5%B9%BF%E6%92%AD/">广播</a> <sup>6</sup></li>
 </ul>
 
 	</div>
+</article>
 
-	<div class="page-template-comments">
+
+
 		
-	</div>
-</div>
+		
+		
+		
 
-<div class="paginator">
-	
-</div>
-  
+					<footer id="footer" class="site-footer card shadow-sm border-0">
+						
+						<div>Theme <a target="_blank" rel="noopener" href="https://github.com/solstice23/hexo-theme-argon"><strong>Argon</strong></a> | Powered by Hexo</div>
+						<div>©開陽의 Blog <strong>2023-2026</strong></div>
+<!-- 
+						<span id="busuanzi_container_site_uv">
+							本站访客数 <span id="busuanzi_value_site_uv"></span> 人次
+						</span>
+ -->
+					</footer>
+				</main>
 			</div>
-
-			
 		</div>
+		
+<script src="/argontheme.js"></script>
 
-		<div class="main-content-footer">
-			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
-    <div class="info-container py-3 text-center">
-        
-        <div class="text-center">
-            &copy;
-            
-              <span>2023</span>
-              -
-            
-            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">開陽</a>
-            
-                
-                <p class="post-count space-x-0.5">
-                    <span>
-                        9  posts au total
-                    </span>
-                    
-                </p>
-            
-        </div>
-        
-        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
-            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
-            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.9.0</a></span>
-        </div>
-        
-        
-        
-        
-        
-    </div>  
-</footer>
-		</div>
+		
+		
+		
+
+		
+
 	</div>
-
-	
-
-	<div class="right-side-tools-container">
-		<div class="side-tools-container">
-	<ul class="hidden-tools-list">
-		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
-			<i class="fa-regular fa-magnifying-glass-plus"></i>
-		</li>
-
-		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
-			<i class="fa-regular fa-magnifying-glass-minus"></i>
-		</li>
-
-		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
-			<i class="fa-regular fa-moon"></i>
-		</li>
-
-		<!-- rss -->
-		
-
-		
-
-		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
-			<i class="fa-regular fa-arrow-down"></i>
-		</li>
-	</ul>
-
-	<ul class="visible-tools-list">
-		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
-			<i class="fa-regular fa-cog fa-spin"></i>
-		</li>
-		
-		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
-			<i class="arrow-up fas fa-arrow-up"></i>
-			<span class="percent"></span>
-		</li>
-		
-		
-	</ul>
 </div>
-	</div>
-
-	<div class="image-viewer-container" role="dialog" aria-modal="true" aria-label="Visionneuse d’images">
-	<button class="image-viewer-close" type="button" aria-label="Fermer">
-		<i class="fa-solid fa-xmark"></i>
-	</button>
-	<button class="image-viewer-prev" type="button" aria-label="Précédent">
-		<i class="fa-solid fa-chevron-left"></i>
-	</button>
-	<div class="image-viewer-frame">
-		<img src="" alt="">
-	</div>
-	<div class="image-viewer-exif-panel hidden absolute left-1/2 bottom-20 -translate-x-1/2 w-[min(92vw,420px)] max-h-[60vh] overflow-hidden rounded-2xl bg-background-color-transparent-80 p-4 text-left shadow-redefine-flat backdrop-blur-md" role="dialog" aria-label="EXIF" aria-hidden="true">
-		<div class="flex items-center justify-between mb-3">
-			<span class="text-sm font-semibold text-first-text-color">EXIF</span>
-			<button class="image-viewer-exif-close flex h-8 w-8 items-center justify-center rounded-full bg-background-color-transparent-80 text-first-text-color transition hover:bg-background-color-transparent-40" type="button" aria-label="Fermer">
-				<i class="fa-solid fa-xmark text-[0.65rem]"></i>
-			</button>
-		</div>
-		<div class="image-viewer-exif-cards grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pr-1 scrollbar-hide"></div>
-		<template class="image-viewer-exif-card-template">
-			<div class="rounded-lg bg-background-color-transparent-40 px-3 py-2">
-				<div class="image-viewer-exif-card-header flex items-center gap-2 mb-1">
-					<i class="image-viewer-exif-card-icon fa-solid fa-circle-info text-xs text-third-text-color"></i>
-					<div class="image-viewer-exif-card-title text-xs font-semibold text-first-text-color"></div>
-				</div>
-				<div class="image-viewer-exif-card-items flex flex-col gap-1"></div>
-			</div>
-		</template>
-	</div>
-	<button class="image-viewer-exif-toggle flex items-center gap-2 hidden absolute left-1/2 bottom-6 -translate-x-1/2 rounded-full border border-border-color bg-background-color-transparent-80 px-4 py-2 text-first-text-color backdrop-blur-md transition hover:bg-background-color-transparent-40" type="button" aria-label="EXIF" aria-expanded="false">
-		<i class="fa-solid fa-circle-info text-xs"></i>
-		<span class="text-xs font-semibold uppercase tracking-wider">EXIF</span>
-	</button>
-	<button class="image-viewer-next" type="button" aria-label="Suivant">
-		<i class="fa-solid fa-chevron-right"></i>
-	</button>
-</div>
-
-
-	
-
-</main>
-
-
-
-<script src="/js/build/libs/Swup.min.js"></script>
-
-<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
-
-<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
-
-<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
-
-<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
-
-<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
-
-<script>
-    window.swup = new Swup({
-        plugins: [
-            new SwupScriptsPlugin({
-                optin: true,
-            }),
-            new SwupProgressPlugin(),
-            new SwupScrollPlugin({
-                offset: 80,
-            }),
-            new SwupSlideTheme({
-                mainElement: ".main-content-body",
-            }),
-            new SwupPreloadPlugin(),
-        ],
-        containers: ["#swup"],
-    });
-
-    window.dispatchEvent(
-        new CustomEvent("redefine:swup:ready", {
-            detail: {
-                swup: window.swup,
-            },
-        }),
-    );
-</script>
-
-
-
-	
-<script src="/js/build/main.js" type="module"></script>
-
-
-
-
-
-
-
-
-  
-<script src="/js/build/libs/Typed.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
-
-
-
-	
+<noscript>
+	<style>
+		article img.lazyload[src^="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPg"]{display: none;}
+		.comment-item-text .comment-sticker.lazyload{display: none;}
+	</style>
+</noscript>
 </body>
 
+
+
 </html>
+
