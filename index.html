@@ -151,7 +151,70 @@
 	
 <meta name="generator" content="Hexo 8.1.1"></head>
 
- <style> .post-content p { text-indent: 2em; } </style> 
+<style>
+/* 1. 恢复正文全局段落首行缩进 2 字符 */
+.post-content p {
+  text-indent: 2em;
+}
+
+/* 2. 强行排除列表项里的缩进，防止无序/有序列表的小圆点和序号错位 */
+.post-content ul,
+.post-content ol,
+.post-content li,
+.post-content li p {
+  text-indent: 0 !important;
+}
+
+/* 3. 确保图片本身居中显示，并强制去除圆角以保持直角卡片风格 */
+.post-content img {
+  display: block;
+  margin: 15px auto !important;
+  max-width: 100%;
+  border-radius: 0 !important;
+}
+
+/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+.post-content p:has(img) {
+  text-indent: 0 !important;
+}
+
+/* 5. 图片描述的文字样式 */
+.image-caption {
+  display: block;
+  text-align: center;
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  text-indent: 0 !important;
+}
+</style>
+<script>
+// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
+document.addEventListener("DOMContentLoaded", function() {
+  var images = document.querySelectorAll('.post-content img');
+  images.forEach(function(img) {
+    var altText = img.getAttribute('alt');
+    // 如果存在描述且不是空字符串
+    if (altText && altText.trim() !== '') {
+      var caption = document.createElement('div');
+      caption.className = 'image-caption';
+      caption.innerText = altText;
+      
+      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
+      var parent = img.parentNode;
+      if (parent.tagName.toLowerCase() === 'a') {
+        // 如果有，把描述文字插在 <a> 标签的外面
+        parent.parentNode.insertBefore(caption, parent.nextSibling);
+      } else {
+        // 如果没有，直接插在图片下方
+        parent.insertBefore(caption, img.nextSibling);
+      }
+    }
+  });
+});
+</script>
+
 
 <style id="themecolor_css">
 	
@@ -548,7 +611,7 @@
 	<article class="post card bg-white shadow-sm border-0 ">
 	<header class="post-header text-center post-header-with-thumbnail">
 		
-				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='img/1971iiii.jpg' alt='thumbnail'></img>
+				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='/img/1971iiii.jpg' alt='thumbnail'></img>
 				<div class='post-header-text-container'>
 			
 		<a class="post-title" href="/1971/">画饼？图定不开行？益湛公益车K1971怎么个事？</a>
@@ -557,7 +620,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2026-7-30 7:40:20 | 编辑于 2026-8-4 14:25:01">2026-7-30 7:40
+							<time title="发布于 2026-7-30 7:40:20 | 编辑于 2026-8-5 8:19:24">2026-7-30 7:40
 							</time>
 						</div>
 					
@@ -663,7 +726,7 @@
 	<article class="post card bg-white shadow-sm border-0 ">
 	<header class="post-header text-center post-header-with-thumbnail">
 		
-				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='img/df4d3174.jpg' alt='thumbnail'></img>
+				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='/img/df4d3174.jpg' alt='thumbnail'></img>
 				<div class='post-header-text-container'>
 			
 		<a class="post-title" href="/lz/">游子、故乡、益湛线</a>

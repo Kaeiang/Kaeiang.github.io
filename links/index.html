@@ -16,7 +16,7 @@
 <meta property="og:description" content="Xiaomage       TECH OTAKUS CHANGE THE WORLD.                             百品博客       我欲穿花寻路，直入白云深处，浩气展虹霓。                             Radiofun-Hongの网站       爱旗帜，爱广播！爱结子，爱晴夏！がんばって！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-04T14:20:07.653Z">
+<meta property="article:modified_time" content="2026-08-04T14:21:37.701Z">
 <meta property="article:author" content="Kaiyang">
 <meta name="twitter:card" content="summary">
 
@@ -153,7 +153,70 @@
 	
 <meta name="generator" content="Hexo 8.1.1"></head>
 
- <style> .post-content p { text-indent: 2em; } </style> 
+<style>
+/* 1. 恢复正文全局段落首行缩进 2 字符 */
+.post-content p {
+  text-indent: 2em;
+}
+
+/* 2. 强行排除列表项里的缩进，防止无序/有序列表的小圆点和序号错位 */
+.post-content ul,
+.post-content ol,
+.post-content li,
+.post-content li p {
+  text-indent: 0 !important;
+}
+
+/* 3. 确保图片本身居中显示，并强制去除圆角以保持直角卡片风格 */
+.post-content img {
+  display: block;
+  margin: 15px auto !important;
+  max-width: 100%;
+  border-radius: 0 !important;
+}
+
+/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+.post-content p:has(img) {
+  text-indent: 0 !important;
+}
+
+/* 5. 图片描述的文字样式 */
+.image-caption {
+  display: block;
+  text-align: center;
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  text-indent: 0 !important;
+}
+</style>
+<script>
+// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
+document.addEventListener("DOMContentLoaded", function() {
+  var images = document.querySelectorAll('.post-content img');
+  images.forEach(function(img) {
+    var altText = img.getAttribute('alt');
+    // 如果存在描述且不是空字符串
+    if (altText && altText.trim() !== '') {
+      var caption = document.createElement('div');
+      caption.className = 'image-caption';
+      caption.innerText = altText;
+      
+      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
+      var parent = img.parentNode;
+      if (parent.tagName.toLowerCase() === 'a') {
+        // 如果有，把描述文字插在 <a> 标签的外面
+        parent.parentNode.insertBefore(caption, parent.nextSibling);
+      } else {
+        // 如果没有，直接插在图片下方
+        parent.insertBefore(caption, img.nextSibling);
+      }
+    }
+  });
+});
+</script>
+
 
 <style id="themecolor_css">
 	
@@ -558,7 +621,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2023-7-17 0:00:00 | 编辑于 2026-8-4 22:20:07">2023-7-17 0:00
+							<time title="发布于 2023-7-17 0:00:00 | 编辑于 2026-8-4 22:21:37">2023-7-17 0:00
 							</time>
 						</div>
 					
@@ -567,7 +630,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							578 字
+							573 字
 						</div>
 					
 						
@@ -735,7 +798,7 @@
 <li>站点描述：<strong>时光走过，留下声音，留下美！</strong></li>
 <li>站点图像：<strong><a href="%5Bhttps://kaiyang.top/img/avatar.jpg">https://kaiyangs.top/img/avatar.jpg</a></strong></li>
 </ul>
-<p>愿意交换友链的各位小伙伴，还请通过首页的E-mail图标联系我，在这里与愿意与各位合乎中国内地相关规例的网站相互交流、相互进步。</p>
+<p>愿意交换友链的各位小伙伴，还请通过E-mail联系我，在这里与愿意与各位合乎中国内地相关规例的网站相互交流、相互进步。</p>
 
 	</div>
 </article>
