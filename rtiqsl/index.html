@@ -8,12 +8,12 @@
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta name="description" content="八月四号傍晚，RTI粤语广播时段。前面数分钟收到了无干扰的清晰信号，截取内容后在它们的官网传送收听报告。很快到当月二十四号就收到发来的挂号邮件。但是由于九月开学，到现在才整理出来： 信封： 正身：">
+	<meta name="description" content="八月四号傍晚，RTI粤语广播时段。前面数分钟收到了无干扰的清晰信号，截取内容后在它们的官网传送收听报告。很快到当月二十四号就收到发来的挂号邮件。但是由于九月开学，到现在才整理出来： 信封：正面背面 正身：正背">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开箱！R.T.I中央广播电台QSL卡片">
 <meta property="og:url" content="https://kaiyangs.top/rtiqsl/index.html">
 <meta property="og:site_name" content="開陽의 Blog">
-<meta property="og:description" content="八月四号傍晚，RTI粤语广播时段。前面数分钟收到了无干扰的清晰信号，截取内容后在它们的官网传送收听报告。很快到当月二十四号就收到发来的挂号邮件。但是由于九月开学，到现在才整理出来： 信封： 正身：">
+<meta property="og:description" content="八月四号傍晚，RTI粤语广播时段。前面数分钟收到了无干扰的清晰信号，截取内容后在它们的官网传送收听报告。很快到当月二十四号就收到发来的挂号邮件。但是由于九月开学，到现在才整理出来： 信封：正面背面 正身：正背">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kaiyangs.top/img/twxfz.jpg">
 <meta property="og:image" content="https://kaiyangs.top/img/twxfb.jpg">
@@ -176,7 +176,7 @@
 /* 3. 确保图片本身居中显示，并强制去除圆角以保持直角卡片风格 */
 .post-content img {
   display: block;
-  margin: 15px auto !important;
+  margin: 15px auto 5px auto !important; /* 压缩图片与图注之间的距离 */
   max-width: 100%;
   border-radius: 0 !important;
 }
@@ -186,18 +186,32 @@
   text-indent: 0 !important;
 }
 
-/* 5. 图片描述的文字样式 */
-.image-caption {
+/* 5. 原生 figure / figcaption 图注重置 */
+.post-content figure {
+  margin: 15px 0 !important; /* figure 容器的上下边距 */
+}
+
+.post-content figcaption {
   display: block;
   text-align: center;
-  font-size: 0.9em;
-  color: #888;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  font-size: 0.88em;
+  color: #888888;
+  margin-top: 4px !important;
+  margin-bottom: 0 !important; /* 强行清空图注底部的间距！ */
+  padding-bottom: 0 !important;
   text-indent: 0 !important;
 }
 
-/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+/* 核心绝杀：强行把 figure/figcaption 后面紧跟的段落顶边距干掉 */
+.post-content figure + p,
+.post-content figcaption + p,
+.post-content figure + *,
+.post-content figcaption + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 6. 专属修复：引用块 (blockquote) Win10 直角样式重置 */
 .post-content blockquote {
   border-radius: 0 !important;
   border-left: 4px solid #5e72e4 !important;
@@ -221,55 +235,6 @@
   color: #0078D7;
 }
 </style>
-<script>
-// 9. 移动端 PJAX + 懒加载兼容版图注生成
-(function() {
-  function processImageCaption(img) {
-    if (img.dataset.captionAdded) return;
-    
-    var altText = img.getAttribute('alt');
-    if (altText && altText.trim() !== '') {
-      var caption = document.createElement('div');
-      caption.className = 'image-caption';
-      caption.innerText = altText;
-      
-      var parent = img.parentNode;
-      if (parent && parent.tagName.toLowerCase() === 'a') {
-        parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else if (parent) {
-        parent.insertBefore(caption, img.nextSibling);
-      }
-      img.dataset.captionAdded = "true";
-    }
-  }
-
-  function initCaptions() {
-    var images = document.querySelectorAll('.post-content img');
-    images.forEach(processImageCaption);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCaptions);
-  } else {
-    initCaptions();
-  }
-
-  var observer = new MutationObserver(function(mutations) {
-    var shouldCheck = false;
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-        shouldCheck = true;
-      }
-    });
-    
-    if (shouldCheck) {
-      setTimeout(initCaptions, 100);
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-})();
-</script>
 
 
 <style id="themecolor_css">
@@ -408,9 +373,9 @@
 	
 	<div id="banner_container" class="banner-container container text-center">
 		
-			<div class="banner-title text-white" data-text="二〇二六，在kaiyangs.top重新出发！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
+			<div class="banner-title text-white" data-text="时光走过，留下声音，留下美！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
 		
-		<span class="banner-subtitle d-block">时光走过，留下声音，留下美！</span></div>
+		<span class="banner-subtitle d-block">二〇二六，重新出发！</span></div>
 	</div>
 	
 		<style>
@@ -542,7 +507,7 @@
 			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
 				<div class="leftbar-announcement-body">
 					<div class="leftbar-announcement-title text-white">公告</div>
-					<div class="leftbar-announcement-content text-white">受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
+					<div class="leftbar-announcement-content text-white">	受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
 				</div>
 			</div>
 		
@@ -715,7 +680,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							85 字
+							91 字
 						</div>
 					
 						
@@ -734,9 +699,9 @@
 
 	<div class="post-content" id="post_content">
 		<p>八月四号傍晚，RTI粤语广播时段。前面数分钟收到了无干扰的清晰信号，截取内容后在它们的官网传送收听报告。很快到当月二十四号就收到发来的挂号邮件。但是由于九月开学，到现在才整理出来：</p>
-<p><strong>信封：</strong><br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  src="/img/twxfz.jpg" alt="正面"><br><img data-original="/img/twxfb.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="背面"></p>
+<p><strong>信封：</strong><br><figure><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  src="/img/twxfz.jpg" alt="正面"><figcaption aria-hidden="true">正面</figcaption></figure><br><figure><img data-original="/img/twxfb.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="背面"><figcaption aria-hidden="true">背面</figcaption></figure></p>
 
-<p><strong>正身：</strong><br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  src="/img/twqslz.jpg" alt="正"><br><img data-original="/img/twqslb.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="背"></p>
+<p><strong>正身：</strong><br><figure><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  src="/img/twqslz.jpg" alt="正"><figcaption aria-hidden="true">正</figcaption></figure><br><figure><img data-original="/img/twqslb.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="背"><figcaption aria-hidden="true">背</figcaption></figure></p>
 
 
 	</div>

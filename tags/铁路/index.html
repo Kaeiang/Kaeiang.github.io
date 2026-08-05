@@ -168,7 +168,7 @@
 /* 3. 确保图片本身居中显示，并强制去除圆角以保持直角卡片风格 */
 .post-content img {
   display: block;
-  margin: 15px auto !important;
+  margin: 15px auto 5px auto !important; /* 压缩图片与图注之间的距离 */
   max-width: 100%;
   border-radius: 0 !important;
 }
@@ -178,18 +178,32 @@
   text-indent: 0 !important;
 }
 
-/* 5. 图片描述的文字样式 */
-.image-caption {
+/* 5. 原生 figure / figcaption 图注重置 */
+.post-content figure {
+  margin: 15px 0 !important; /* figure 容器的上下边距 */
+}
+
+.post-content figcaption {
   display: block;
   text-align: center;
-  font-size: 0.9em;
-  color: #888;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  font-size: 0.88em;
+  color: #888888;
+  margin-top: 4px !important;
+  margin-bottom: 0 !important; /* 强行清空图注底部的间距！ */
+  padding-bottom: 0 !important;
   text-indent: 0 !important;
 }
 
-/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+/* 核心绝杀：强行把 figure/figcaption 后面紧跟的段落顶边距干掉 */
+.post-content figure + p,
+.post-content figcaption + p,
+.post-content figure + *,
+.post-content figcaption + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 6. 专属修复：引用块 (blockquote) Win10 直角样式重置 */
 .post-content blockquote {
   border-radius: 0 !important;
   border-left: 4px solid #5e72e4 !important;
@@ -213,55 +227,6 @@
   color: #0078D7;
 }
 </style>
-<script>
-// 9. 移动端 PJAX + 懒加载兼容版图注生成
-(function() {
-  function processImageCaption(img) {
-    if (img.dataset.captionAdded) return;
-    
-    var altText = img.getAttribute('alt');
-    if (altText && altText.trim() !== '') {
-      var caption = document.createElement('div');
-      caption.className = 'image-caption';
-      caption.innerText = altText;
-      
-      var parent = img.parentNode;
-      if (parent && parent.tagName.toLowerCase() === 'a') {
-        parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else if (parent) {
-        parent.insertBefore(caption, img.nextSibling);
-      }
-      img.dataset.captionAdded = "true";
-    }
-  }
-
-  function initCaptions() {
-    var images = document.querySelectorAll('.post-content img');
-    images.forEach(processImageCaption);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCaptions);
-  } else {
-    initCaptions();
-  }
-
-  var observer = new MutationObserver(function(mutations) {
-    var shouldCheck = false;
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-        shouldCheck = true;
-      }
-    });
-    
-    if (shouldCheck) {
-      setTimeout(initCaptions, 100);
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-})();
-</script>
 
 
 <style id="themecolor_css">
@@ -400,9 +365,9 @@
 	
 	<div id="banner_container" class="banner-container container text-center">
 		
-			<div class="banner-title text-white" data-text="二〇二六，在kaiyangs.top重新出发！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
+			<div class="banner-title text-white" data-text="时光走过，留下声音，留下美！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
 		
-		<span class="banner-subtitle d-block">时光走过，留下声音，留下美！</span></div>
+		<span class="banner-subtitle d-block">二〇二六，重新出发！</span></div>
 	</div>
 	
 		<style>
@@ -548,7 +513,7 @@
 			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
 				<div class="leftbar-announcement-body">
 					<div class="leftbar-announcement-title text-white">公告</div>
-					<div class="leftbar-announcement-content text-white">受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
+					<div class="leftbar-announcement-content text-white">	受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
 				</div>
 			</div>
 		
@@ -694,7 +659,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							2k 字
+							2.1k 字
 						</div>
 					
 						
@@ -702,7 +667,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-readingtime">
 							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
-							6 分钟
+							7 分钟
 						</div>
 					
 		</div>
@@ -760,7 +725,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							3k 字
+							3.1k 字
 						</div>
 					
 						

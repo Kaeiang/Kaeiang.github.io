@@ -173,7 +173,7 @@
 /* 3. 确保图片本身居中显示，并强制去除圆角以保持直角卡片风格 */
 .post-content img {
   display: block;
-  margin: 15px auto !important;
+  margin: 15px auto 5px auto !important; /* 压缩图片与图注之间的距离 */
   max-width: 100%;
   border-radius: 0 !important;
 }
@@ -183,18 +183,32 @@
   text-indent: 0 !important;
 }
 
-/* 5. 图片描述的文字样式 */
-.image-caption {
+/* 5. 原生 figure / figcaption 图注重置 */
+.post-content figure {
+  margin: 15px 0 !important; /* figure 容器的上下边距 */
+}
+
+.post-content figcaption {
   display: block;
   text-align: center;
-  font-size: 0.9em;
-  color: #888;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  font-size: 0.88em;
+  color: #888888;
+  margin-top: 4px !important;
+  margin-bottom: 0 !important; /* 强行清空图注底部的间距！ */
+  padding-bottom: 0 !important;
   text-indent: 0 !important;
 }
 
-/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+/* 核心绝杀：强行把 figure/figcaption 后面紧跟的段落顶边距干掉 */
+.post-content figure + p,
+.post-content figcaption + p,
+.post-content figure + *,
+.post-content figcaption + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 6. 专属修复：引用块 (blockquote) Win10 直角样式重置 */
 .post-content blockquote {
   border-radius: 0 !important;
   border-left: 4px solid #5e72e4 !important;
@@ -218,55 +232,6 @@
   color: #0078D7;
 }
 </style>
-<script>
-// 9. 移动端 PJAX + 懒加载兼容版图注生成
-(function() {
-  function processImageCaption(img) {
-    if (img.dataset.captionAdded) return;
-    
-    var altText = img.getAttribute('alt');
-    if (altText && altText.trim() !== '') {
-      var caption = document.createElement('div');
-      caption.className = 'image-caption';
-      caption.innerText = altText;
-      
-      var parent = img.parentNode;
-      if (parent && parent.tagName.toLowerCase() === 'a') {
-        parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else if (parent) {
-        parent.insertBefore(caption, img.nextSibling);
-      }
-      img.dataset.captionAdded = "true";
-    }
-  }
-
-  function initCaptions() {
-    var images = document.querySelectorAll('.post-content img');
-    images.forEach(processImageCaption);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCaptions);
-  } else {
-    initCaptions();
-  }
-
-  var observer = new MutationObserver(function(mutations) {
-    var shouldCheck = false;
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-        shouldCheck = true;
-      }
-    });
-    
-    if (shouldCheck) {
-      setTimeout(initCaptions, 100);
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-})();
-</script>
 
 
 <style id="themecolor_css">
@@ -405,9 +370,9 @@
 	
 	<div id="banner_container" class="banner-container container text-center">
 		
-			<div class="banner-title text-white" data-text="二〇二六，在kaiyangs.top重新出发！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
+			<div class="banner-title text-white" data-text="时光走过，留下声音，留下美！" data-interval=""><span class="banner-title-inner">&nbsp;</span>
 		
-		<span class="banner-subtitle d-block">时光走过，留下声音，留下美！</span></div>
+		<span class="banner-subtitle d-block">二〇二六，重新出发！</span></div>
 	</div>
 	
 		<style>
@@ -539,7 +504,7 @@
 			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
 				<div class="leftbar-announcement-body">
 					<div class="leftbar-announcement-title text-white">公告</div>
-					<div class="leftbar-announcement-content text-white">受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
+					<div class="leftbar-announcement-content text-white">	受github.io二级域名在国内网络环境下访问故障影响，2026年8月2日，本站新启用kaiyangs.top域名。敬请留意！</div>
 				</div>
 			</div>
 		
@@ -738,7 +703,7 @@
 <p>「丰收锣鼓」有效地阻碍了此类「敌台」电波传播，由于相关部门斥巨资在各地修筑起数量众多的「试验台」，干扰信号能够基本覆盖内地。甚至能够在日本及荷兰接收，也有各国无线电爱好者上载其接收记录.亦能够印证「当Firedrake运行时，全球任意一点均能够接收到信号」一说。不过由于各种原因，内地有时仍能接收到干扰较轻的「敌台」节目，沿海一带更为明显。而有趣的一点是，据称部分干扰装置系从法国进口，所以法广短波节目（现已停播）未受到过干扰。</p>
 <p>在锣鼓喧天的「民乐台」转攻夜间后，日间的干扰方式更加多样化。形成「以中国之声为主体，多种干扰方式并存」的局面。日间播音的「敌台」被各地「试验台」同频以中央人民广播电台第一套节目中国之声常态化干扰覆盖。接收这些频率时体现为中国之声信号明显盖过另一方，或者两股信号搅杂，难以听清。也有使用静音干扰的方式，体现为「敌台」播音时间所用频率信号强度及信号质量较高，却并无声音传出。不过这些方式也难免失灵，体验为「敌台」信号明显盖过干扰信号，似乎「反客为主」，或者根本没有干扰。如某电台全天以过百个频率以小功率灵活地开展「游击战」，令各地「试验台」难以应对。</p>
 <p>各地「试验台」并非完全在设定的程序下运作。台湾地区中央广播电台在一封回函中指，「……换频的实质效果，仅有3~5分钟，干扰电台很快即再次如影随形。」可见干扰时仍然有工作人员监测频率。</p>
-<p><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="/img/rtimail.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="中央广播电台的回复"></p>
+<p><figure><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="/img/rtimail.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="中央广播电台的回复"><figcaption aria-hidden="true">中央广播电台的回复</figcaption></figure></p>
 
 <p>关于文中「敌台」的定义，即被干扰的对象，除公认的四家电台外，在不同时期有所不同。如中印关系紧张期间，原本未受干扰的印度德里电台在此期间也被干扰，在未出现影响对外关系的事件时，N.H.K日本国际传媒、K.B.S韩国国际广播电台有时也会因不明原因而被干扰。</p>
 <p>面对各地「试验台」的持续工作，有无线电爱好者尝试数种方法试图将干扰降至最低，但实际效果存疑。如此，借用互联网上的SDR接收机在境外站台收听节目显得更加高效。</p>
