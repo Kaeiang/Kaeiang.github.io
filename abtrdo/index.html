@@ -8,12 +8,12 @@
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta name="description" content="封面说明：封面取自德生电器网站，侵权请联系删除。   提示本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果  收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底要注意哪几点。 环境›天线›设备很多现在刚入坑的小">
+	<meta name="description" content="提示封面取自德生电器网站。本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果  收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底要注意哪几点。 环境›天线›设备很多现在刚入坑的小伙伴会纠结，我到底该选哪一款机器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="成为一名收音机爱好者需要注意什么？">
 <meta property="og:url" content="https://kaiyangs.top/abtrdo/index.html">
 <meta property="og:site_name" content="開陽의 Blog">
-<meta property="og:description" content="封面说明：封面取自德生电器网站，侵权请联系删除。   提示本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果  收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底要注意哪几点。 环境›天线›设备很多现在刚入坑的小">
+<meta property="og:description" content="提示封面取自德生电器网站。本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果  收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底要注意哪几点。 环境›天线›设备很多现在刚入坑的小伙伴会纠结，我到底该选哪一款机器">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kaiyangs.top/img/antenna.jpg">
 <meta property="og:image" content="https://kaiyangs.top/img/htsw.jpg">
@@ -181,7 +181,7 @@
   border-radius: 0 !important;
 }
 
-/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+/* 4. 取消包含图片的段落缩进 */
 .post-content p:has(img) {
   text-indent: 0 !important;
 }
@@ -196,31 +196,79 @@
   margin-bottom: 20px;
   text-indent: 0 !important;
 }
+
+/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+.post-content blockquote {
+  border-radius: 0 !important;
+  border-left: 4px solid #5e72e4 !important;
+  background-color: #f8f9fa !important;
+  padding: 12px 18px !important;
+  margin: 15px 0 !important;
+}
+
+/* 7. 引用块内所有段落：取消首行缩进，靠左对齐 */
+.post-content blockquote p {
+  text-indent: 0 !important;
+}
+
+/* 8. 引用块第一个段落（标题）与下方正文紧凑衔接 */
+.post-content blockquote p:first-child {
+  margin-bottom: 8px !important;
+}
+
+.post-content blockquote p:first-child strong {
+  font-size: 1.05em;
+  color: #0078D7;
+}
 </style>
 <script>
-// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
-document.addEventListener("DOMContentLoaded", function() {
-  var images = document.querySelectorAll('.post-content img');
-  images.forEach(function(img) {
+// 9. 移动端 PJAX + 懒加载兼容版图注生成
+(function() {
+  function processImageCaption(img) {
+    if (img.dataset.captionAdded) return;
+    
     var altText = img.getAttribute('alt');
-    // 如果存在描述且不是空字符串
     if (altText && altText.trim() !== '') {
       var caption = document.createElement('div');
       caption.className = 'image-caption';
       caption.innerText = altText;
       
-      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
       var parent = img.parentNode;
-      if (parent.tagName.toLowerCase() === 'a') {
-        // 如果有，把描述文字插在 <a> 标签的外面
+      if (parent && parent.tagName.toLowerCase() === 'a') {
         parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else {
-        // 如果没有，直接插在图片下方
+      } else if (parent) {
         parent.insertBefore(caption, img.nextSibling);
       }
+      img.dataset.captionAdded = "true";
+    }
+  }
+
+  function initCaptions() {
+    var images = document.querySelectorAll('.post-content img');
+    images.forEach(processImageCaption);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    var shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+        shouldCheck = true;
+      }
+    });
+    
+    if (shouldCheck) {
+      setTimeout(initCaptions, 100);
     }
   });
-});
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 
 
@@ -686,10 +734,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	<div class="post-content" id="post_content">
 		<blockquote>
-<p><strong>封面说明</strong>：封面取自德生电器网站，侵权请联系删除。</p>
-</blockquote>
-<blockquote>
-<p><strong>提示</strong><br>本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果</p>
+<p><strong>提示</strong><br>封面取自德生电器网站。<br>本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果</p>
 </blockquote>
 <p>收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底要注意哪几点。</p>
 <h2 id="环境›天线›设备"><a href="#环境›天线›设备" class="headerlink" title="环境›天线›设备"></a>环境›天线›设备</h2><p>很多现在刚入坑的小伙伴会纠结，我到底该选哪一款机器，要不要做&#x2F;买一个外接天线。比如我就倒腾了一根快十米长的天线，可实际用了以后发现效果还不如自己跑到楼顶去坐着。对于听广播而言，环境是首要的。就好比河里的水，上游的水无论如何都比下游的水干净，即使经过过滤。</p>
@@ -799,10 +844,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	socialShare("#share", {
 	    title : '成为一名收音机爱好者需要注意什么？',
 	    description : `
-封面说明：封面取自德生电器网站，侵权请联系删除。
+提示封面取自德生电器网站。本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果
 
-
-提示本文仅代表作者个人观点，仅供参考，还请根...`,
+收音...`,
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
 	    source : 'https://kaiyangs.top/abtrdo/'

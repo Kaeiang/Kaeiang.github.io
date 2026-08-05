@@ -8,12 +8,12 @@
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta name="description" content="** 提示：由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。 ** 无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断传播的行为。体现为这些电台的播音频率被中国传统民乐覆">
+	<meta name="description" content="** 提示**由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。   无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断传播的行为。体现为这些电台的播音频率被中国传统民乐">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈丰收锣鼓&#x2F;Firedrake">
 <meta property="og:url" content="https://kaiyangs.top/hello/index.html">
 <meta property="og:site_name" content="開陽의 Blog">
-<meta property="og:description" content="** 提示：由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。 ** 无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断传播的行为。体现为这些电台的播音频率被中国传统民乐覆">
+<meta property="og:description" content="** 提示**由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。   无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断传播的行为。体现为这些电台的播音频率被中国传统民乐">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kaiyangs.top/img/rtimail.png">
 <meta property="article:published_time" content="2023-07-22T10:59:55.000Z">
@@ -178,7 +178,7 @@
   border-radius: 0 !important;
 }
 
-/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+/* 4. 取消包含图片的段落缩进 */
 .post-content p:has(img) {
   text-indent: 0 !important;
 }
@@ -193,31 +193,79 @@
   margin-bottom: 20px;
   text-indent: 0 !important;
 }
+
+/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+.post-content blockquote {
+  border-radius: 0 !important;
+  border-left: 4px solid #5e72e4 !important;
+  background-color: #f8f9fa !important;
+  padding: 12px 18px !important;
+  margin: 15px 0 !important;
+}
+
+/* 7. 引用块内所有段落：取消首行缩进，靠左对齐 */
+.post-content blockquote p {
+  text-indent: 0 !important;
+}
+
+/* 8. 引用块第一个段落（标题）与下方正文紧凑衔接 */
+.post-content blockquote p:first-child {
+  margin-bottom: 8px !important;
+}
+
+.post-content blockquote p:first-child strong {
+  font-size: 1.05em;
+  color: #0078D7;
+}
 </style>
 <script>
-// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
-document.addEventListener("DOMContentLoaded", function() {
-  var images = document.querySelectorAll('.post-content img');
-  images.forEach(function(img) {
+// 9. 移动端 PJAX + 懒加载兼容版图注生成
+(function() {
+  function processImageCaption(img) {
+    if (img.dataset.captionAdded) return;
+    
     var altText = img.getAttribute('alt');
-    // 如果存在描述且不是空字符串
     if (altText && altText.trim() !== '') {
       var caption = document.createElement('div');
       caption.className = 'image-caption';
       caption.innerText = altText;
       
-      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
       var parent = img.parentNode;
-      if (parent.tagName.toLowerCase() === 'a') {
-        // 如果有，把描述文字插在 <a> 标签的外面
+      if (parent && parent.tagName.toLowerCase() === 'a') {
         parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else {
-        // 如果没有，直接插在图片下方
+      } else if (parent) {
         parent.insertBefore(caption, img.nextSibling);
       }
+      img.dataset.captionAdded = "true";
+    }
+  }
+
+  function initCaptions() {
+    var images = document.querySelectorAll('.post-content img');
+    images.forEach(processImageCaption);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    var shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+        shouldCheck = true;
+      }
+    });
+    
+    if (shouldCheck) {
+      setTimeout(initCaptions, 100);
     }
   });
-});
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 
 
@@ -682,7 +730,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	</header>
 
 	<div class="post-content" id="post_content">
-		<p>** 提示：由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。 **</p>
+		<blockquote>
+<p>** 提示**<br>由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。 </p>
+</blockquote>
 <p>无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断传播的行为。体现为这些电台的播音频率被中国传统民乐覆盖，从而实现阻止境外带有明显意识形态的信息传播。下面基于一般的习惯，我们称之为「丰收锣鼓」。</p>
 <p>资料显示，「丰收锣鼓」于世纪之交前后出现，其实现形式到现在有所变化。从最初的全天候针对大多数「敌台」，到如今夜间专攻R.F.Asia,干扰形式总体上更为隐蔽，令人不易觉察。不过仍有部分地区能够在日间接收到「丰收锣鼓」。此外，我国台湾地区中央广播电台所用1557kHz仍然全天候受到干扰，即使此频率上播出K.B.S韩国国际广播电台节目时也不例外。</p>
 <p>「丰收锣鼓」有效地阻碍了此类「敌台」电波传播，由于相关部门斥巨资在各地修筑起数量众多的「试验台」，干扰信号能够基本覆盖内地。甚至能够在日本及荷兰接收，也有各国无线电爱好者上载其接收记录.亦能够印证「当Firedrake运行时，全球任意一点均能够接收到信号」一说。不过由于各种原因，内地有时仍能接收到干扰较轻的「敌台」节目，沿海一带更为明显。而有趣的一点是，据称部分干扰装置系从法国进口，所以法广短波节目（现已停播）未受到过干扰。</p>
@@ -762,7 +812,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <script type="text/javascript">
 	socialShare("#share", {
 	    title : '浅谈丰收锣鼓/Firedrake',
-	    description : `** 提示：由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停...`,
+	    description : `
+** 提示**由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完...`,
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
 	    source : 'https://kaiyangs.top/hello/'

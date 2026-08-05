@@ -173,7 +173,7 @@
   border-radius: 0 !important;
 }
 
-/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+/* 4. 取消包含图片的段落缩进 */
 .post-content p:has(img) {
   text-indent: 0 !important;
 }
@@ -188,31 +188,79 @@
   margin-bottom: 20px;
   text-indent: 0 !important;
 }
+
+/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+.post-content blockquote {
+  border-radius: 0 !important;
+  border-left: 4px solid #5e72e4 !important;
+  background-color: #f8f9fa !important;
+  padding: 12px 18px !important;
+  margin: 15px 0 !important;
+}
+
+/* 7. 引用块内所有段落：取消首行缩进，靠左对齐 */
+.post-content blockquote p {
+  text-indent: 0 !important;
+}
+
+/* 8. 引用块第一个段落（标题）与下方正文紧凑衔接 */
+.post-content blockquote p:first-child {
+  margin-bottom: 8px !important;
+}
+
+.post-content blockquote p:first-child strong {
+  font-size: 1.05em;
+  color: #0078D7;
+}
 </style>
 <script>
-// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
-document.addEventListener("DOMContentLoaded", function() {
-  var images = document.querySelectorAll('.post-content img');
-  images.forEach(function(img) {
+// 9. 移动端 PJAX + 懒加载兼容版图注生成
+(function() {
+  function processImageCaption(img) {
+    if (img.dataset.captionAdded) return;
+    
     var altText = img.getAttribute('alt');
-    // 如果存在描述且不是空字符串
     if (altText && altText.trim() !== '') {
       var caption = document.createElement('div');
       caption.className = 'image-caption';
       caption.innerText = altText;
       
-      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
       var parent = img.parentNode;
-      if (parent.tagName.toLowerCase() === 'a') {
-        // 如果有，把描述文字插在 <a> 标签的外面
+      if (parent && parent.tagName.toLowerCase() === 'a') {
         parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else {
-        // 如果没有，直接插在图片下方
+      } else if (parent) {
         parent.insertBefore(caption, img.nextSibling);
       }
+      img.dataset.captionAdded = "true";
+    }
+  }
+
+  function initCaptions() {
+    var images = document.querySelectorAll('.post-content img');
+    images.forEach(processImageCaption);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    var shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+        shouldCheck = true;
+      }
+    });
+    
+    if (shouldCheck) {
+      setTimeout(initCaptions, 100);
     }
   });
-});
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 
 
@@ -779,7 +827,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							158 字
+							160 字
 						</div>
 					
 						
@@ -799,7 +847,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	<div class="post-content">
 		
 			
-				封面图取自BD6MM的博客网站
+				
+提示封面图取自BD6MM的博客网站
+
 因为Firedrake的源在中星6B上，因此我们可以使用接收设备取得原始音频档。实际上，早在2009年 satdirectory.com 就释出有音频录音，不过由于时间原因。原下载链接已经失效，这里提供一个备份载点，供爱好者们使用。
 
   
@@ -808,8 +858,7 @@ document.addEventListener("DOMContentLoaded", function() {
 Firedrake所用12首传统民乐标题如下
 
 东王得胜令
-清宮晏乐
-秦...
+清宮...
 			
 		
 	</div>
@@ -872,7 +921,9 @@ Firedrake所用12首传统民乐标题如下
 	<div class="post-content">
 		
 			
-				** 本文章写于2023年，部分内容已经过时。**
+				
+提示本文章写于2023年，部分内容已经过时。
+
 目前，许多国家都还有华语广播。不同电台的节目也有各自的特点，这篇文章会从各个方面给出自己的体验，再综合给出评语。
 在评价接收效果时，以SINPO来打分。相关评分标准如表所示：
 
@@ -893,7 +944,7 @@ O 综合评价
 5 极好
 
 
-4 ...
+4 良...
 			
 		
 	</div>
@@ -957,12 +1008,10 @@ O 综合评价
 		
 			
 				
-封面说明：封面取自德生电器网站，侵权请联系删除。
+提示封面取自德生电器网站。本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果
 
-
-提示本文仅代表作者个人观点，仅供参考，还请根据实际情况以达到最佳效果
-
-收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底...
+收音机作为一种古早的信息传播渠道，在互联网时代的今天已经淡出大众视线。虽然收音机的传播能力远不及国际互联网，但在其它方面也独具特点。可谓「各有千秋」。当然，这篇文章面向有意向入坑或已经入坑的各位，以一个老萌新的视角谈谈到底要注意哪几点。
+环境›天线›设备...
 			
 		
 	</div>
@@ -1025,8 +1074,10 @@ O 综合评价
 	<div class="post-content">
 		
 			
-				** 提示：由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。 **
-无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断传...
+				
+** 提示**由于懂王在其第二任期后大幅缩减对某两个知名“敌台”资金，致使后者播出时间大幅减少或完全停播，“丰收锣鼓”也随这些敌台逐渐销声匿迹起来。现在再想从广播里接收到民乐信号已经比较困难。 
+
+无论是Firedrake还是丰收锣鼓，一般都指向我国各地「试验台」通过传送中星6B上的12首打击乐节目对境外带有明显政治倾向的「敌台」广播节目实现阻断...
 			
 		
 	</div>

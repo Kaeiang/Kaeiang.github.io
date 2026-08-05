@@ -175,7 +175,7 @@
   border-radius: 0 !important;
 }
 
-/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+/* 4. 取消包含图片的段落缩进 */
 .post-content p:has(img) {
   text-indent: 0 !important;
 }
@@ -190,31 +190,79 @@
   margin-bottom: 20px;
   text-indent: 0 !important;
 }
+
+/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+.post-content blockquote {
+  border-radius: 0 !important;
+  border-left: 4px solid #5e72e4 !important;
+  background-color: #f8f9fa !important;
+  padding: 12px 18px !important;
+  margin: 15px 0 !important;
+}
+
+/* 7. 引用块内所有段落：取消首行缩进，靠左对齐 */
+.post-content blockquote p {
+  text-indent: 0 !important;
+}
+
+/* 8. 引用块第一个段落（标题）与下方正文紧凑衔接 */
+.post-content blockquote p:first-child {
+  margin-bottom: 8px !important;
+}
+
+.post-content blockquote p:first-child strong {
+  font-size: 1.05em;
+  color: #0078D7;
+}
 </style>
 <script>
-// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
-document.addEventListener("DOMContentLoaded", function() {
-  var images = document.querySelectorAll('.post-content img');
-  images.forEach(function(img) {
+// 9. 移动端 PJAX + 懒加载兼容版图注生成
+(function() {
+  function processImageCaption(img) {
+    if (img.dataset.captionAdded) return;
+    
     var altText = img.getAttribute('alt');
-    // 如果存在描述且不是空字符串
     if (altText && altText.trim() !== '') {
       var caption = document.createElement('div');
       caption.className = 'image-caption';
       caption.innerText = altText;
       
-      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
       var parent = img.parentNode;
-      if (parent.tagName.toLowerCase() === 'a') {
-        // 如果有，把描述文字插在 <a> 标签的外面
+      if (parent && parent.tagName.toLowerCase() === 'a') {
         parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else {
-        // 如果没有，直接插在图片下方
+      } else if (parent) {
         parent.insertBefore(caption, img.nextSibling);
       }
+      img.dataset.captionAdded = "true";
+    }
+  }
+
+  function initCaptions() {
+    var images = document.querySelectorAll('.post-content img');
+    images.forEach(processImageCaption);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    var shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+        shouldCheck = true;
+      }
+    });
+    
+    if (shouldCheck) {
+      setTimeout(initCaptions, 100);
     }
   });
-});
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 
 
@@ -673,7 +721,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </blockquote>
 <p>现在，本站使用<a target="_blank" rel="noopener" href="https://github.com/solstice23/hexo-theme-argon">Argon</a>主题。</p>
 <p>这篇关于是新写的，网站创建之初的关于页，存放至<a href="/about1/">旧版关于页</a></p>
-<h2 id="与我联系"><a href="#与我联系" class="headerlink" title="与我联系"></a>与我联系</h2><p>电子邮箱地址：  <strong><a href="mailto:&#x6b;&#97;&#x69;&#121;&#x61;&#x6e;&#x67;&#x40;&#x6f;&#117;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#115;&#103;">kaiyang@outlook.sg</a></strong></p>
+<h2 id="与我联系"><a href="#与我联系" class="headerlink" title="与我联系"></a>与我联系</h2><p>电子邮箱地址：  <strong><a href="mailto:&#x6b;&#97;&#105;&#121;&#97;&#x6e;&#103;&#x40;&#111;&#x75;&#116;&#108;&#x6f;&#111;&#107;&#46;&#x73;&#x67;">kaiyang@outlook.sg</a></strong></p>
 <p>邮政通信地址：  <del>联系电子邮箱以获取</del></p>
 <p><del>欢迎随时骚扰XD</del></p>
 

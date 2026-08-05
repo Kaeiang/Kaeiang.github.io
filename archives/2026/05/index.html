@@ -173,7 +173,7 @@
   border-radius: 0 !important;
 }
 
-/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+/* 4. 取消包含图片的段落缩进 */
 .post-content p:has(img) {
   text-indent: 0 !important;
 }
@@ -188,31 +188,79 @@
   margin-bottom: 20px;
   text-indent: 0 !important;
 }
+
+/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+.post-content blockquote {
+  border-radius: 0 !important;
+  border-left: 4px solid #5e72e4 !important;
+  background-color: #f8f9fa !important;
+  padding: 12px 18px !important;
+  margin: 15px 0 !important;
+}
+
+/* 7. 引用块内所有段落：取消首行缩进，靠左对齐 */
+.post-content blockquote p {
+  text-indent: 0 !important;
+}
+
+/* 8. 引用块第一个段落（标题）与下方正文紧凑衔接 */
+.post-content blockquote p:first-child {
+  margin-bottom: 8px !important;
+}
+
+.post-content blockquote p:first-child strong {
+  font-size: 1.05em;
+  color: #0078D7;
+}
 </style>
 <script>
-// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
-document.addEventListener("DOMContentLoaded", function() {
-  var images = document.querySelectorAll('.post-content img');
-  images.forEach(function(img) {
+// 9. 移动端 PJAX + 懒加载兼容版图注生成
+(function() {
+  function processImageCaption(img) {
+    if (img.dataset.captionAdded) return;
+    
     var altText = img.getAttribute('alt');
-    // 如果存在描述且不是空字符串
     if (altText && altText.trim() !== '') {
       var caption = document.createElement('div');
       caption.className = 'image-caption';
       caption.innerText = altText;
       
-      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
       var parent = img.parentNode;
-      if (parent.tagName.toLowerCase() === 'a') {
-        // 如果有，把描述文字插在 <a> 标签的外面
+      if (parent && parent.tagName.toLowerCase() === 'a') {
         parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else {
-        // 如果没有，直接插在图片下方
+      } else if (parent) {
         parent.insertBefore(caption, img.nextSibling);
       }
+      img.dataset.captionAdded = "true";
+    }
+  }
+
+  function initCaptions() {
+    var images = document.querySelectorAll('.post-content img');
+    images.forEach(processImageCaption);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    var shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+        shouldCheck = true;
+      }
+    });
+    
+    if (shouldCheck) {
+      setTimeout(initCaptions, 100);
     }
   });
-});
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 
 
@@ -631,7 +679,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2026-5-4 15:52:34 | 编辑于 2026-8-4 22:04:12">2026-5-4 15:52
+							<time title="发布于 2026-5-4 15:52:34 | 编辑于 2026-8-5 13:42:35">2026-5-4 15:52
 							</time>
 						</div>
 					
@@ -640,7 +688,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							1.3k 字
+							1.4k 字
 						</div>
 					
 						
@@ -660,8 +708,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	<div class="post-content">
 		
 			
-				一、在希望的田野上 2016~2019我所生活的农村在2018年前都不通宽带，而彼时农村小孩的手上已经开始出现城里亲戚淘汰下来的旧智能手机，比如我的手上就有一部小米2s。在没有网络的情况下，智能手机很难发挥其应有的作用，在手上的功能无限接近于板砖。
-不知何时，我发现了手机里内置的收音机功能。在那个少儿频道下午只会播放让人提不起兴趣的86版《西游记》...
+				如今，收听广播已是我生活中的日常，而要追溯这一爱好的由来，却总是会勾起一些从前的日子，与从前的事。我与无线电广播的故事大概能分解成三个时间段，每个时间段对应着不同的部分：
+一、希望的田野上 2016~2019我所生活的地方在2018年前都不通宽带，而彼时小孩的手上已经开始出现城里亲戚淘汰下来的旧智能手机，比如我的手上就有一部小米2s。在没有网络的情...
 			
 		
 	</div>

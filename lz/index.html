@@ -8,12 +8,12 @@
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta name="description" content="题图为牵引K1804次列车的宁局邕段东风4D 3174 本文作者并不是资深爱好者，部分内容属于未经官方证实的个人推测，可能存在失实错误。  1月5号下午两点，由武昌站始发，开往湛江方向去的K1803次列车进入长沙站停靠，这辆属于南宁局南宁客运段的普速列车将在此迎接益湛（湖南益阳——广东湛江）铁路永玉（湖南永州——广西玉林）段沿线诸县城的务工人员及学生群体返乡。当天期末考试完的我也买了一张9个小时">
+	<meta name="description" content="提示题图为牵引K1804次列车的宁局邕段东风4DK 3174本文作者并不是资深爱好者，部分内容属于未经官方证实的个人推测，可能存在失实错误。  1月5号下午两点，由武昌站始发，开往湛江方向去的K1803次列车进入长沙站停靠，这辆属于南宁局南宁客运段的普速列车将在此迎接益湛（湖南益阳——广东湛江）铁路永玉（湖南永州——广西玉林）段沿线诸县城的务工人员及学生群体返乡。当天期末考试完的我也买了一张9个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="游子、故乡、益湛线">
 <meta property="og:url" content="https://kaiyangs.top/lz/index.html">
 <meta property="og:site_name" content="開陽의 Blog">
-<meta property="og:description" content="题图为牵引K1804次列车的宁局邕段东风4D 3174 本文作者并不是资深爱好者，部分内容属于未经官方证实的个人推测，可能存在失实错误。  1月5号下午两点，由武昌站始发，开往湛江方向去的K1803次列车进入长沙站停靠，这辆属于南宁局南宁客运段的普速列车将在此迎接益湛（湖南益阳——广东湛江）铁路永玉（湖南永州——广西玉林）段沿线诸县城的务工人员及学生群体返乡。当天期末考试完的我也买了一张9个小时">
+<meta property="og:description" content="提示题图为牵引K1804次列车的宁局邕段东风4DK 3174本文作者并不是资深爱好者，部分内容属于未经官方证实的个人推测，可能存在失实错误。  1月5号下午两点，由武昌站始发，开往湛江方向去的K1803次列车进入长沙站停靠，这辆属于南宁局南宁客运段的普速列车将在此迎接益湛（湖南益阳——广东湛江）铁路永玉（湖南永州——广西玉林）段沿线诸县城的务工人员及学生群体返乡。当天期末考试完的我也买了一张9个">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kaiyangs.top/img/yanxian.jpg">
 <meta property="og:image" content="https://kaiyangs.top/img/yzhh.jpg">
@@ -182,7 +182,7 @@
   border-radius: 0 !important;
 }
 
-/* 4. 取消包含图片的段落缩进（防止图片跟着缩进两格） */
+/* 4. 取消包含图片的段落缩进 */
 .post-content p:has(img) {
   text-indent: 0 !important;
 }
@@ -197,31 +197,79 @@
   margin-bottom: 20px;
   text-indent: 0 !important;
 }
+
+/* 6. 专属修复：引用块 (blockquote) 样式重置 */
+.post-content blockquote {
+  border-radius: 0 !important;
+  border-left: 4px solid #5e72e4 !important;
+  background-color: #f8f9fa !important;
+  padding: 12px 18px !important;
+  margin: 15px 0 !important;
+}
+
+/* 7. 引用块内所有段落：取消首行缩进，靠左对齐 */
+.post-content blockquote p {
+  text-indent: 0 !important;
+}
+
+/* 8. 引用块第一个段落（标题）与下方正文紧凑衔接 */
+.post-content blockquote p:first-child {
+  margin-bottom: 8px !important;
+}
+
+.post-content blockquote p:first-child strong {
+  font-size: 1.05em;
+  color: #0078D7;
+}
 </style>
 <script>
-// 6. 自动提取 Markdown 的 alt 文本并显示在图片下方，兼容 Argon 的 Fancybox 结构
-document.addEventListener("DOMContentLoaded", function() {
-  var images = document.querySelectorAll('.post-content img');
-  images.forEach(function(img) {
+// 9. 移动端 PJAX + 懒加载兼容版图注生成
+(function() {
+  function processImageCaption(img) {
+    if (img.dataset.captionAdded) return;
+    
     var altText = img.getAttribute('alt');
-    // 如果存在描述且不是空字符串
     if (altText && altText.trim() !== '') {
       var caption = document.createElement('div');
       caption.className = 'image-caption';
       caption.innerText = altText;
       
-      // 判断图片外面是否包了一层 <a> 标签（Argon 的灯箱特性）
       var parent = img.parentNode;
-      if (parent.tagName.toLowerCase() === 'a') {
-        // 如果有，把描述文字插在 <a> 标签的外面
+      if (parent && parent.tagName.toLowerCase() === 'a') {
         parent.parentNode.insertBefore(caption, parent.nextSibling);
-      } else {
-        // 如果没有，直接插在图片下方
+      } else if (parent) {
         parent.insertBefore(caption, img.nextSibling);
       }
+      img.dataset.captionAdded = "true";
+    }
+  }
+
+  function initCaptions() {
+    var images = document.querySelectorAll('.post-content img');
+    images.forEach(processImageCaption);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+
+  var observer = new MutationObserver(function(mutations) {
+    var shouldCheck = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+        shouldCheck = true;
+      }
+    });
+    
+    if (shouldCheck) {
+      setTimeout(initCaptions, 100);
     }
   });
-});
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 
 
@@ -686,10 +734,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	</header>
 
 	<div class="post-content" id="post_content">
-		<ul>
-<li>题图为牵引K1804次列车的宁局邕段东风4D 3174</li>
-<li>本文作者并不是资深爱好者，部分内容属于未经官方证实的个人推测，可能存在失实错误。</li>
-</ul>
+		<blockquote>
+<p><strong>提示</strong><br>题图为牵引K1804次列车的宁局邕段东风4DK 3174<br>本文作者并不是资深爱好者，部分内容属于未经官方证实的个人推测，可能存在失实错误。</p>
+</blockquote>
 <p>1月5号下午两点，由武昌站始发，开往湛江方向去的K1803次列车进入长沙站停靠，这辆属于南宁局南宁客运段的普速列车将在此迎接益湛（湖南益阳——广东湛江）铁路永玉（湖南永州——广西玉林）段沿线诸县城的务工人员及学生群体返乡。当天期末考试完的我也买了一张9个小时的硬座票，准备乘坐这趟列车返乡。</p>
 <p>与其它经由京广、衡柳线由长沙经衡阳前往永州的普速列车不同的是，本次列车从长沙出发沿沪昆线下行，经过娄底站后转入益湛铁路运行，历经邵东、邵阳站后方才抵达永州。区段内运行时间相比其它列车的3至4个小时增至6小时46分。其中，在邵阳站至永州站仅105公里的区间内运行时间长达2小时48分，单是中途“临时停靠”的时间就达到了1小时40分钟，导致平均时速达到了惊人的37KM&#x2F;H。<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="/img/yanxian.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="益湛永玉段某处沿线"></p>
 
@@ -854,8 +901,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	socialShare("#share", {
 	    title : '游子、故乡、益湛线',
 	    description : `
-题图为牵引K1804次列车的宁局邕段东风4D 3174
-本文作者并不是资深爱好者，部分内容属于未经...`,
+提示题图为牵引K1804次列车的宁局邕段东风4DK 3174本文作者并不是资深爱好者，部分内容属于...`,
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
 	    source : 'https://kaiyangs.top/lz/'
