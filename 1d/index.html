@@ -376,6 +376,8 @@
 		<span class="banner-subtitle d-block">二〇二六，重新出发！</span></div>
 	</div>
 	
+	<div id="random-sentence" class="banner-subtitle d-block text-white"></div>
+	
 		<style>
 			section.banner{
 				background-image: url(/assets/img/banner.jpg) !important;
@@ -570,7 +572,7 @@
 							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a href="/archives">
-										<span class="site-state-item-count">12</span>
+										<span class="site-state-item-count">13</span>
 										<span class="site-state-item-name">文章</span>
 									</a>
 								</div>
@@ -901,7 +903,7 @@
 	</div>
 
 
-<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/shaoou1/" rel="next"> 【原神·少偶】会相见（下）</a></div></div>
+<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"><span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="/1y/" rel="prev"> 北漂年报</a></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/shaoou1/" rel="next"> 【原神·少偶】会相见（下）</a></div></div>
 
 
 
@@ -982,6 +984,11 @@
         walineInstance = Waline.init({
             el: '#waline',
             serverURL: 'https://comments.kaiyangs.top',
+            emoji: [
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/bilibili',
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/tieba',
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/weibo'
+            ],
             locale: {
                 placeholder: '时光走过，留下声音留下美。请在这里留下您的足迹（支持markdown语法哦）'
             }

@@ -373,6 +373,8 @@
 		<span class="banner-subtitle d-block">二〇二六，重新出发！</span></div>
 	</div>
 	
+	<div id="random-sentence" class="banner-subtitle d-block text-white"></div>
+	
 		<style>
 			section.banner{
 				background-image: url(/assets/img/banner.jpg) !important;
@@ -567,7 +569,7 @@
 							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a href="/archives">
-										<span class="site-state-item-count">12</span>
+										<span class="site-state-item-count">13</span>
 										<span class="site-state-item-name">文章</span>
 									</a>
 								</div>
@@ -1004,6 +1006,11 @@
         walineInstance = Waline.init({
             el: '#waline',
             serverURL: 'https://comments.kaiyangs.top',
+            emoji: [
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/bilibili',
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/tieba',
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/weibo'
+            ],
             locale: {
                 placeholder: '时光走过，留下声音留下美。请在这里留下您的足迹（支持markdown语法哦）'
             }

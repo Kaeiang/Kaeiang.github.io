@@ -372,6 +372,8 @@
 		<span class="banner-subtitle d-block">二〇二六，重新出发！</span></div>
 	</div>
 	
+	<div id="random-sentence" class="banner-subtitle d-block text-white"></div>
+	
 		<style>
 			section.banner{
 				background-image: url(/assets/img/banner.jpg) !important;
@@ -545,7 +547,7 @@
 							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a href="/archives">
-										<span class="site-state-item-count">12</span>
+										<span class="site-state-item-count">13</span>
 										<span class="site-state-item-name">文章</span>
 									</a>
 								</div>
@@ -741,7 +743,7 @@
 </blockquote>
 <p>现在，本站使用<a target="_blank" rel="noopener" href="https://github.com/solstice23/hexo-theme-argon">Argon</a>主题。</p>
 <p>这篇关于是新写的，网站创建之初的关于页，存放至<a href="/about1/">旧版关于页</a></p>
-<h3 id="与我联系"><a href="#与我联系" class="headerlink" title="与我联系"></a>与我联系</h3><p>电子邮箱地址：<strong><a href="mailto:&#x6b;&#97;&#x69;&#x79;&#97;&#x6e;&#103;&#x40;&#x6f;&#117;&#x74;&#108;&#x6f;&#111;&#107;&#46;&#115;&#103;">kaiyang@outlook.sg</a></strong></p>
+<h3 id="与我联系"><a href="#与我联系" class="headerlink" title="与我联系"></a>与我联系</h3><p>电子邮箱地址：<strong><a href="mailto:&#x6b;&#x61;&#x69;&#x79;&#97;&#110;&#x67;&#64;&#x6f;&#x75;&#x74;&#x6c;&#111;&#111;&#107;&#46;&#x73;&#x67;">kaiyang@outlook.sg</a></strong></p>
 <p>邮政通信地址：<del>联系电子邮箱以获取</del></p>
 <p>本页面下方的评论区</p>
 <p><del>欢迎随时骚扰XD</del></p>
@@ -831,6 +833,11 @@
         walineInstance = Waline.init({
             el: '#waline',
             serverURL: 'https://comments.kaiyangs.top',
+            emoji: [
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/bilibili',
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/tieba',
+                'https://cdn.jsdmirror.com/gh/walinejs/emojis@1.1.0/weibo'
+            ],
             locale: {
                 placeholder: '时光走过，留下声音留下美。请在这里留下您的足迹（支持markdown语法哦）'
             }
