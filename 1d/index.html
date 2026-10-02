@@ -408,6 +408,29 @@
 			filter: brightness(0.65);
 		}
 		
+			#content:after {
+				content: '';
+				display: block;
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				z-index: -2;
+				background: url(/img/yanzi!.jpg);
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				opacity: 0;
+				transition: opacity .5s ease;
+			}
+			html.darkmode #content:after {
+				opacity: 1;
+			}
+			html.darkmode #content:before {
+				opacity: 0;
+			}
+		
 		
 			#banner, #banner .shape {
 				background: transparent !important;
@@ -572,7 +595,7 @@
 							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a href="/archives">
-										<span class="site-state-item-count">13</span>
+										<span class="site-state-item-count">14</span>
 										<span class="site-state-item-name">文章</span>
 									</a>
 								</div>
